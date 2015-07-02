@@ -13,7 +13,7 @@ num_classes = 10;
 [train,test] = ex1_load_mnist(binary_digits);
 
 % Add row of 1s to the dataset to act as an intercept term.
-train.X = [ones(1,size(train.X,2)); train.X]; 
+train.X = [ones(1,size(train.X,2)); train.X];
 test.X = [ones(1,size(test.X,2)); test.X];
 train.y = train.y+1; % make labels 1-based.
 test.y = test.y+1; % make labels 1-based.
@@ -36,6 +36,9 @@ theta = rand(n,num_classes-1)*0.001;
 % TODO:  Implement batch softmax regression in the softmax_regression_vec.m
 % file using a vectorized implementation.
 %
+
+grad_check(@softmax_regression_vec, theta(:), 10, train.X, train.y);
+
 tic;
 theta(:)=minFunc(@softmax_regression_vec, theta(:), options, train.X, train.y);
 fprintf('Optimization took %f seconds.\n', toc);
@@ -51,8 +54,14 @@ accuracy = multi_classifier_accuracy(theta,test.X,test.y);
 fprintf('Test accuracy: %2.1f%%\n', 100*accuracy);
 
 
-% % for learning curves
-% global test
-% global train
-% test.err{end+1} = multi_classifier_accuracy(theta,test.X,test.y);
-% train.err{end+1} = multi_classifier_accuracy(theta,train.X,train.y);
+% for learning curves
+global test
+global train
+if ~isfield(test, 'err')
+    test.err = cell(0);
+end
+if ~isfield(train, 'err')
+    train.err = cell(0);
+end
+test.err{end+1} = multi_classifier_accuracy(theta,test.X,test.y);
+train.err{end+1} = multi_classifier_accuracy(theta,train.X,train.y);

@@ -56,10 +56,10 @@ fprintf('Optimization took %f seconds.\n', toc);
 %
 % Uncomment the lines below to run your vectorized code.
 %Re-initialize parameters
-%theta = rand(n,1);
-%tic;
-%theta = minFunc(@linear_regression_vec, theta, options, train.X, train.y);
-%fprintf('Optimization took %f seconds.\n', toc);
+theta = rand(n,1);
+tic;
+theta = minFunc(@linear_regression_vec, theta, options, train.X, train.y);
+fprintf('Optimization took %f seconds.\n', toc);
 
 % Plot predicted prices and actual prices from training set.
 actual_prices = train.y;
@@ -79,12 +79,12 @@ fprintf('RMS testing error: %f\n', test_rms);
 % Plot predictions on test data.
 plot_prices=true;
 if (plot_prices)
-  [actual_prices,I] = sort(actual_prices);
-  predicted_prices=predicted_prices(I);
-  plot(actual_prices, 'rx');
-  hold on;
-  plot(predicted_prices,'bx');
-  legend('Actual Price', 'Predicted Price');
-  xlabel('House #');
-  ylabel('House price ($1000s)');
+    [actual_prices,I] = sort(actual_prices);
+    predicted_prices=predicted_prices(I);
+    plot(actual_prices, 'rx');
+    hold on;
+    plot(predicted_prices,'bx');
+    legend('Actual Price', 'Predicted Price');
+    xlabel('House #');
+    ylabel('House price ($1000s)');
 end
