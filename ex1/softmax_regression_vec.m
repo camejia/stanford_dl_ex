@@ -40,33 +40,6 @@ f = -sum(log(P(ind)));
 P(ind) = P(ind) - 1;
 g = X * P(1 : end - 1, :).';
 
-% f2 = 0;
-% for iSamp = 1 : m
-%     for kClass = 1 : num_classes
-%         P = exp(thetaz(:, kClass).' * X(:, iSamp)) / sum(exp(thetaz.' * X(:, iSamp)));
-%         if y(iSamp) == kClass
-%             f2 = f2 - P;
-%         end
-%     end % for kClass
-% end % for iSamp
-% 
-% g2 = zeros(size(thetaz));
-% for iSamp = 1 : m
-%     for kClass = 1 : num_classes
-%         P2 = exp(thetaz(:, kClass).' * X(:, iSamp)) / sum(exp(thetaz.' * X(:, iSamp)));
-%         for coord = 1 : n
-%             if y(iSamp) == kClass
-%                 g2(coord, kClass) = g2(coord, kClass) + X(coord, iSamp) * (1.0 - P2);
-%             else
-%                 g2(coord, kClass) = g2(coord, kClass) + X(coord, iSamp) * P2;
-%             end
-%         end
-%     end % for kClass
-% end % for iSamp
-% 
-% f,
-% f2,
-% g,
-% g2
+% TODO: Regularization (a.k.a. weight decay)
 
 g=g(:); % make gradient a vector for minFunc

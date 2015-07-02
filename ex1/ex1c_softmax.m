@@ -37,7 +37,7 @@ theta = rand(n,num_classes-1)*0.001;
 % file using a vectorized implementation.
 %
 
-grad_check(@softmax_regression_vec, theta(:), 10, train.X, train.y);
+% grad_check(@softmax_regression_vec, theta(:), 10, train.X, train.y);
 
 tic;
 theta(:)=minFunc(@softmax_regression_vec, theta(:), options, train.X, train.y);
